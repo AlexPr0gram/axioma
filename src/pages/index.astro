@@ -1,0 +1,122 @@
+---
+import '../styles/global.css';
+import Arrow from '../components/Arrow.astro';
+import PlatformScreens from '../components/PlatformScreens.astro';
+import { typography } from '../utils/typography';
+import { company, modules } from '../data/content';
+const navigation = [['company','Компания'],['product','HackerMatrix'],['modules','Модули'],['contact','Контакты']];
+---
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0D0B12" />
+  <meta name="description" content="ООО «АКСИОМА» разрабатывает HackerMatrix — интерактивную платформу для обучения, практики и соревнований по информационной безопасности." />
+  <title>АКСИОМА — HackerMatrix</title>
+  <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
+</head>
+<body class="bg-ink text-paper antialiased">
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="header">
+  <a class="brand" href="#" aria-label="АКСИОМА — на главную"><img src="/images/logo-full.png" alt="АКСИОМА" width="2030" height="445" /></a>
+  <nav class="desktop-nav" aria-label="Основная навигация">{navigation.map(([id,label]) => <a href={`#${id}`}>{label}</a>)}</nav>
+  <a href="#contact" class="header-cta">Обсудить проект</a>
+  <button class="menu-toggle" aria-label="Открыть меню" aria-controls="mobile-nav" aria-expanded="false"><span></span><span></span></button>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Мобильная навигация" hidden>{navigation.map(([id,label]) => <a href={`#${id}`}>{label}</a>)}</nav>
+</header>
+<aside class="support-banner" aria-label="Поддержка проекта"><div class="support-banner-inner"><p class="support-banner-title">Проект поддержан Фондом содействия инновациям</p><div class="support-banner-details"><p>Программа «Студенческий стартап»</p><p>Договор № 2158ГССС27/106878 от 19.11.2025</p></div></div></aside>
+<main id="main">
+<section class="hero" aria-labelledby="hero-title">
+  <div class="matrix-art" aria-hidden="true"><div class="matrix-grid"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><img src="/images/logo.svg" alt="" width="450" height="359" /><span class="art-cross">+</span></div>
+  <div class="hero-content">
+    <h1 id="hero-title">АКСИОМА<span>Практика<br/>кибербезопасности.</span></h1>
+    <p class="hero-description">Разрабатываем HackerMatrix — платформу для обучения, практики и соревнований по информационной безопасности.</p>
+  </div>
+  <div class="hero-bottom"><a href="#company">Листайте вниз <Arrow direction="down" /></a></div>
+</section>
+<section id="product" class="product section reveal">
+  <div class="wrap">
+  <div class="product-heading"><h2 class="product-logo"><img src="/images/hackermatrix-full.png" alt="HackerMatrix" width="2059" height="270" loading="lazy" /></h2><p>Индивидуальная траектория.<br/>Практические навыки.</p></div>
+  <div class="product-diagram" role="img" aria-label="Архитектура HackerMatrix: образовательный модуль, конструктор заданий и мониторинг прогресса"><div class="diagram-root"><img src="/images/hackermatrix.svg" alt="" width="350" height="270"/><span>HackerMatrix</span></div><div class="diagram-line"></div><div class="diagram-modules">{modules.map(m => <div><span>{typography(m.title)}</span><span class="diagram-point"></span></div>)}</div></div>
+  <div class="product-foot"><p>Интерактивные курсы, практические задания и соревновательные мероприятия — в рамках разрабатываемой платформы с индивидуальными образовательными траекториями.</p></div>
+  </div>
+</section>
+<PlatformScreens themes={[{
+  title: 'Индивидуальные траектории',
+  description: 'По результатам теста платформа подбирает курсы и практические задачи для конкретного пользователя.',
+  screens: [
+    { src: '/images/platform/trajectory-result.jpg', alt: 'Результат теста по Web: уровень Advanced, рекомендованные курсы и практические задачи', caption: 'Персональные рекомендации' },
+    { src: '/images/platform/trajectory-categories.jpg', alt: 'Выбор категории оценки навыков: Web, OSINT, Crypto, Reverse и Other', caption: 'Выбор направления' },
+    { src: '/images/platform/trajectory-test.jpg', alt: 'Тестирование навыков по OSINT с вопросами и вариантами ответов', caption: 'Оценка навыков' },
+    { src: '/images/platform/trajectory-review.jpg', alt: 'Разбор ответов на вопросы теста с пояснениями', caption: 'Разбор результатов' },
+  ],
+} , {
+  title: 'Практические задачи',
+  description: 'В каждой категории доступны задания разной сложности. Пользователь выбирает задачу, изучает условие и отправляет флаг для проверки решения.',
+  screens: [
+    { src: '/images/platform/tasks-categories.jpg', alt: 'Категории задач HackerMatrix: OSINT, Reverse Engineering, Web, Cryptography и Other', caption: 'Категории задач' },
+    { src: '/images/platform/tasks-list.jpg', alt: 'Список задач OSINT с фильтром сложности и отметками решённых заданий', caption: 'Сложность и прогресс' },
+    { src: '/images/platform/tasks-osint.jpg', alt: 'Условие задачи ASVS через Google Dorking, поле флага и переход к стенду', caption: 'Задача по OSINT' },
+    { src: '/images/platform/tasks-reverse.jpg', alt: 'Задача Проверка префикса: условие, проверка флага, переход к стенду и файлы задания', caption: 'Задача по реверс-инжинирингу' },
+  ],
+} , {
+  title: 'Курсы',
+  description: 'Каталог курсов с фильтрами по направлению и сложности. Для каждого курса отображаются прогресс обучения и статус прохождения.',
+  screens: [
+    { src: '/images/platform/courses.jpg', alt: 'Каталог курсов HackerMatrix: фильтры по сложности и направлению, курсы с прогрессом и статусами прохождения', caption: 'Каталог курсов и прогресс обучения' },
+  ],
+} , {
+  title: 'Достижения',
+  description: 'Полученные награды и прогресс к новым целям: решение задач, развитие навыков по направлениям и позиции в рейтинге.',
+  screens: [
+    { src: '/images/platform/achievements-overview.jpg', alt: 'Достижения HackerMatrix: общий прогресс, полученные награды за позиции в рейтинге и навыки OSINT', caption: 'Полученные награды' },
+    { src: '/images/platform/achievements-progress.jpg', alt: 'Прогресс достижений за решение задач и развитие навыков Web, Reverse и Crypto', caption: 'Прогресс к новым целям' },
+  ],
+} , {
+  title: 'Личный кабинет',
+  description: 'Статистика по решённым задачам, баллы по категориям, позиция в рейтинге и достижения пользователя — в одном профиле.',
+  screens: [
+    { src: '/images/platform/profile-user.jpg', alt: 'Личный кабинет участника HackerMatrix: место в рейтинге, решённые задачи и статистика по категориям', caption: 'Профиль участника' },
+    { src: '/images/platform/profile-progress.jpg', alt: 'Личный кабинет с накопленными баллами, статистикой по задачам и полученными достижениями', caption: 'Статистика и достижения' },
+  ],
+}]} />
+<section id="company" class="section wrap reveal">
+  
+  <div class="section-body"><h2>Любое решение<br/>начинается <em>с основы.</em></h2><div class="company-copy"><p class="lead">ООО «АКСИОМА»</p><p>Мы разрабатываем HackerMatrix — интерактивную веб-платформу для тренировки навыков в сфере информационной безопасности. В основе проекта — механизм индивидуальных образовательных траекторий.</p><p>Обучение, создание практических заданий и отслеживание результатов объединены в архитектуре одного продукта.</p></div></div>
+</section>
+
+<section id="modules" class="section wrap reveal"><div class="section-intro"><h2>Каждому модулю —<br/><em>своя роль.</em></h2><p>От учебного материала<br/>к измеримому прогрессу.</p></div><div class="module-list">{modules.map(m => <details class="module"><summary><h3>{typography(m.title)}</h3><span class="plus" aria-hidden="true">+</span></summary><div class="module-content"><p>{typography(m.description)}</p><a href="#contact">Задать вопрос о модуле <Arrow /></a></div></details>)}</div></section>
+<section id="audiences" class="section wrap reveal"><h2>Навыки, которые<br/><em>нужны в деле.</em></h2><p class="audience-intro">Платформа разрабатывается для образовательных организаций, корпоративных центров и организаторов соревнований.</p><div class="audience-list"><article><h3>Вузы и СПО</h3><p>Подготовка специалистов по информационной безопасности в высшем и среднем профессиональном образовании.</p></article><article><h3>Корпоративное обучение</h3><p>Программы дополнительного образования, корпоративные образовательные центры и профессиональные курсы.</p></article><article><h3>CTF и киберучения</h3><p>Обучение и организация соревновательных мероприятий в сфере информационной безопасности.</p></article></div></section>
+<section id="process" class="section process reveal"><div class="wrap"><div class="process-heading"><h2>Обсудим<br/><em>вашу задачу.</em></h2><p>Подготовьте заявку в три шага.<br/>Она останется у вас до отправки.</p></div><ol class="steps"><li><span class="step-number" aria-hidden="true">01</span><div class="step-copy"><h3>Опишите задачу</h3><p>Расскажите о проекте и результате, который хотите получить.</p></div></li><li><span class="step-number" aria-hidden="true">02</span><div class="step-copy"><h3>Скачайте заявку</h3><p>Сохраните файл с описанием задачи и вашими контактами.</p></div></li><li><span class="step-number" aria-hidden="true">03</span><div class="step-copy"><h3>Передайте нам</h3><p>Отправьте файл по известному вам каналу связи. Форма не отправляет его автоматически.</p></div></li></ol></div></section>
+<section id="contact" class="section wrap reveal"><div class="contact-grid"><div><h2>Что вы хотите<br/><em>создать?</em></h2><p class="contact-copy">Расскажите о проекте.<br/>Начните с того, что важно для вас.</p><div class="form-notice"><Arrow /><p>Форма создаёт файл заявки. Данные не отправляются на сервер и не сохраняются в браузере.</p></div></div><form id="request-form"><div class="field-row"><label>Ваше имя <span>*</span><input name="name" autocomplete="name" placeholder="Как к вам обращаться" required maxlength="100" /></label><label>Компания<input name="company" autocomplete="organization" placeholder="Название организации" maxlength="160" /></label></div><label>Электронная почта <span>*</span><input name="email" type="email" autocomplete="email" placeholder="you@company.ru" required maxlength="254" /></label><label>Задача или вопрос <span>*</span><textarea name="message" rows="3" placeholder="Коротко о вашем проекте и ожидаемом результате" required maxlength="5000"></textarea></label><button class="button" type="submit"><span class="button-label">Скачать заявку</span><svg class="button-download" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11m-4-4 4 4 4-4M5 16v4h14v-4" /></svg></button><p class="form-hint">* Обязательные поля. После скачивания передайте файл компании самостоятельно.</p><p id="form-status" class="form-status" role="status" aria-live="polite"></p><noscript><p>Для скачивания заявки включите JavaScript. Эта форма не отправляет данные.</p></noscript></form></div></section>
+<section id="details" class="details wrap" aria-label="Сведения о компании и банковские реквизиты"><div class="details-grid"><div class="company-details"><h2>{typography(company.name)}</h2><dl><div><dt>Генеральный директор</dt><dd>{typography(company.director)}</dd></div><div><dt>Фактический адрес</dt><dd>{typography(company.address)}</dd></div><div><dt>Электронная почта</dt><dd><a class="company-email" href={`mailto:${company.email}`}>{company.email}</a></dd></div></dl></div><div class="bank-details"><h3>Реквизиты</h3><dl>{[['ИНН',company.inn],['КПП',company.kpp],['ОГРН',company.ogrn],['Банк',company.bank],['Расчётный счёт',company.account],['БИК',company.bik],['Корреспондентский счёт',company.correspondentAccount]].map(([label,value]) => <div><dt>{typography(label)}</dt><dd class={/^[0-9]+$/.test(value) ? 'requisite-number' : undefined}>{typography(value)}</dd></div>)}</dl></div></div></section>
+</main>
+<aside class="support-banner support-banner-footer" aria-label="Поддержка проекта"><div class="support-banner-inner"><p class="support-banner-title">Проект поддержан Фондом содействия инновациям</p><div class="support-banner-details"><p>Программа «Студенческий стартап»</p><p>Договор № 2158ГССС27/106878 от 19.11.2025</p></div></div></aside>
+<footer class="footer wrap"><a class="brand" href="#" aria-label="АКСИОМА — наверх"><img src="/images/logo-full.png" alt="АКСИОМА" width="2030" height="445" loading="lazy" /></a><span>© {new Date().getFullYear()} ООО «АКСИОМА»</span><a href="#">Наверх <Arrow direction="up" /></a></footer>
+<script>
+  const menu = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('#mobile-nav');
+  function closeMenu() { if (!menu || !nav) return; menu.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-label', 'Открыть меню'); nav.hidden = true; }
+  menu?.addEventListener('click', () => { if (!nav) return; const open = menu.getAttribute('aria-expanded') !== 'true'; menu.setAttribute('aria-expanded', String(open)); menu.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню'); nav.hidden = !open; });
+  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu?.getAttribute('aria-expanded') === 'true') { closeMenu(); menu.focus(); } });
+  matchMedia('(min-width: 901px)').addEventListener('change', closeMenu);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => { el.classList.add('will-reveal'); observer.observe(el); });
+  }
+  document.querySelector<HTMLFormElement>('#request-form')?.addEventListener('submit', e => {
+    e.preventDefault(); const form = e.currentTarget as HTMLFormElement;
+    const status = document.querySelector<HTMLElement>('#form-status');
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim(); const email = String(data.get('email') ?? '').trim(); const message = String(data.get('message') ?? '').trim();
+    if (!name || !email || !message) { if(status) status.textContent = 'Заполните имя, электронную почту и описание задачи.'; return; }
+    const text = `Заявка для ООО «АКСИОМА»\n\nИмя: ${name}\nКомпания: ${String(data.get('company') ?? '').trim()}\nEmail: ${email}\n\nЗадача:\n${message}\n\nЗаявка сформирована локально. Не отправлена.\n`;
+    const url = URL.createObjectURL(new Blob(['\uFEFF', text], { type: 'text/plain;charset=utf-8' }));
+    const link = document.createElement('a'); link.href = url; link.download = 'axioma-request.txt'; document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    if(status) status.textContent = 'Файл заявки подготовлен к\u00a0скачиванию. Заявка не\u00a0отправлена — передайте её компании самостоятельно.';
+  });
+</script>
+</body>
+</html>

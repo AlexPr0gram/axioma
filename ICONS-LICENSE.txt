@@ -1,0 +1,2 @@
+The arrow artwork in src/components/Arrow.astro is original artwork created for this project and dedicated to the public domain under CC0 1.0 Universal. It may be used commercially, modified and distributed without attribution or payment.
+https://creativecommons.org/publicdomain/zero/1.0/
